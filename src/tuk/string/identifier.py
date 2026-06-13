@@ -42,3 +42,11 @@ class IdentifierUpper(Identifier):
         value = str(value).upper()
         return super().__new__(cls, value)
 
+
+class IdentifierLenient(Identifier):
+
+    CHARSET_INITIAL = Identifier.CHARSET
+    CHARSET_FOLLOW = Identifier.CHARSET + r"-."
+    CHARSET = Identifier.CHARSET + r"-."
+    PATTERN = rf"[{re.escape(CHARSET_INITIAL)}][{re.escape(CHARSET_FOLLOW)}]*"
+
